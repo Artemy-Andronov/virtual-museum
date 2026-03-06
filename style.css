@@ -313,15 +313,15 @@ footer {
 }
 /* Подключаем картинки из твоей папки */
 .card-1 .card-img {
-    background-image: url('img/picture2.png');
+    background-image: url('img/nikola.jpg');
 }
 
 .card-2 .card-img {
-    background-image: url('img/picture3.png');
+    background-image: url('img/spas_v_silah.jpg');
 }
 
 .card-3 .card-img {
-    background-image: url('img/picture4.png');
+    background-image: url('img/trinity.jpg');
 }
 
 /* Общий стиль для всех картинок в карточках, чтобы они были четкими */
