@@ -9,25 +9,27 @@
 <body>
 
     <header>
-        <h1>🏛 Виртуальный музей</h1>
-        <!-- Кнопок здесь нет, это меню -->
+        <!-- Логотип-ссылка на начало -->
+        <h1><a href="index.html">🏛 Виртуальный музей</a></h1>
     </header>
 
-    <!-- Главный экран с фоном -->
-    <div class="hero" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('img/main1.png') no-repeat center center/cover;">
-        <h1>Русь: Наследие веков</h1>
-        <p>XIII – XV ВЕКА • ИСТОРИЯ • КУЛЬТУРА • ВЕРА</p>
+    <!-- Главный экран -->
+    <div class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('img/main1.png') no-repeat center center/cover;">
         
-        <div style="margin-top: 40px; max-width: 600px; font-size: 1rem; color: #ccc;">
-            Погрузитесь в эпоху великих битв и духовного возрождения. 
-            Виртуальное путешествие через тьму к свету.
+        <h1>Искусство Древней Руси</h1>
+        <p>XIII – XV ВЕКА • ЖИВОПИСЬ • ИСТОРИЯ • ДУХОВНОСТЬ</p>
+        
+        <div class="hero-desc">
+            Проследите путь национальной художественной школы: от сурового монументализма Новгорода в эпоху ордынского ига — к светлой гармонии Андрея Рублёва и торжеству Московского государства.
         </div>
         
-        <!-- Декоративная кнопка "Листать вниз" -->
-        <div style="margin-top: 50px; font-size: 2rem; color: #c6a87c; animation: bounce 2s infinite;">↓</div>
+        <!-- Стрелка-кнопка -->
+        <a href="#exhibitions" class="scroll-down">↓</a>
+        
     </div>
 
-    <section class="exhibitions">
+    <!-- Секция с экскурсиями -->
+    <section class="exhibitions" id="exhibitions">
         
         <!-- Экскурсия 1 -->
         <article class="card card-1">
