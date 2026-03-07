@@ -70,52 +70,111 @@ header h1 {
     color: var(--accent);
 }
 
-/* 4. Hero Section (Главный экран - как на Studia 54) */
+/* --- 4. HERO SECTION (ИСПРАВЛЕННЫЙ: ЗОЛОТОЙ ТЕКСТ, ЛЕГКОЕ ЗАТЕМНЕНИЕ) --- */
 .hero {
-    height: 80vh; /* Почти на весь экран */
+    height: 80vh; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     position: relative;
-    padding: 0 20px;
-    /* Градиент + Темная подложка, чтобы текст читался */
-    background: radial-gradient(circle at center, #1b1e26 0%, #0b0c10 100%);
+    padding: 0 5%;
     border-bottom: 1px solid var(--border);
 }
 
+/* ЗАТЕМНЕНИЕ (ОСЛАБЛЕНО) */
+/* Было 0.95, ставим 0.7 в центре и быстро растворяем к краям */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 40%, transparent 75%);
+    z-index: 1; 
+    pointer-events: none;
+}
+
+/* Поднимаем текст */
+.hero h1, .hero p, .hero-desc, .scroll-down {
+    position: relative;
+    z-index: 2; 
+}
+
+/* ГЛАВНЫЙ ЗАГОЛОВОК (Вернул шрифт, поставил золотой цвет) */
 .hero h1 {
-    font-size: 4rem; /* Огромный заголовок */
-    margin-bottom: 20px;
-    background: linear-gradient(to right, #fff, #a5a5a5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 600px;
+    font-family: 'Cormorant Garamond', serif; /* Вернул засечки */
     font-weight: 300;
+    font-size: 5.5rem; 
+    margin-bottom: 20px;
+    color: var(--accent); /* Сделал золотым */
+    letter-spacing: 2px;
+    text-shadow: 0 5px 15px rgba(0,0,0,1); /* Тень, чтобы читалось на светлом фоне */
+    text-transform: uppercase;
+    background: none;
+    -webkit-text-fill-color: initial;
 }
 
-/* Добавляем декоративную линию */
+/* ПОДЗАГОЛОВОК */
+.hero p {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95rem;
+    color: var(--accent); /* Золотой */
+    letter-spacing: 6px; 
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-shadow: 0 5px 15px rgba(0,0,0,1);
+}
+
+/* ОПИСАНИЕ */
+.hero-desc {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #dcdcdc; /* Светло-серый, почти белый */
+    line-height: 1.8;
+    max-width: 750px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(198, 168, 124, 0.4);
+    border-bottom: 1px solid rgba(198, 168, 124, 0.4);
+    padding: 25px 0; 
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,1);
+}
+
+/* Анимация стрелки */
+.scroll-down {
+    margin-top: 50px; 
+    font-size: 2rem; 
+    color: var(--accent); 
+    animation: bounce 2s infinite;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-5px);}
+}
+
 .hero::after {
     content: '';
     width: 1px;
-    height: 100px;
+    height: 80px;
     background: linear-gradient(to bottom, var(--accent), transparent);
     position: absolute;
     bottom: 0;
     left: 50%;
+    z-index: 2;
 }
-
-/* 5. Сетка карточек (Как на Interiors) */
+/* 4. КАРТОЧКИ ЭКСКУРСИЙ */
 .exhibitions {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 50px;
     padding: 80px 5%;
     max-width: 1400px;
     margin: 0 auto;
@@ -124,11 +183,9 @@ header h1 {
 .card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    transition: 0.5s ease;
     display: flex;
     flex-direction: column;
-    position: relative;
-    overflow: hidden; /* Чтобы картинка не вылезала */
 }
 
 .card:hover {
@@ -137,17 +194,60 @@ header h1 {
     box-shadow: var(--glow);
 }
 
+/* Настройки для икон */
 .card-img {
-    height: 300px; /* Высокие картинки */
+    height: 480px; 
     background-size: cover;
-    background-position: center;
-    filter: grayscale(30%); /* Чуть приглушаем цвета для стиля */
-    transition: 0.5s;
+    background-repeat: no-repeat;
+    filter: grayscale(30%);
+    transition: 0.6s ease;
+    border-bottom: 1px solid var(--border);
 }
 
 .card:hover .card-img {
-    filter: grayscale(0%); /* При наведении цвет возвращается */
-    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+/* ИЗМЕНЕНИЯ ЗДЕСЬ: Делаем выравнивание по центру */
+.card-content {
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center; /* Текст по центру */
+    align-items: center; /* Элементы (кнопка) по центру */
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    color: #fff;
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+/* Кнопка теперь тоже по центру */
+.btn {
+    padding: 14px 28px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    background: transparent;
+    margin-top: auto; /* Прижимаем кнопку к низу, если текста мало */
+}
+
+.btn:hover {
+    background: var(--accent);
+    color: #000;
 }
 
 .card-content {
@@ -311,23 +411,26 @@ footer {
     .exhibitions { grid-template-columns: 1fr; }
     header { flex-direction: column; gap: 15px; }
 }
-/* Подключаем картинки из твоей папки */
-.card-1 .card-img {
-    background-image: url('./img/nikola.jpg');
+
+/* ПРИВЯЗКА ФОТО ОБЛОЖЕК */
+.card-1 .card-img { 
+    background-image: url('./img/nikola.jpg'); 
+    background-position: center 2%; /* Чуть-чуть отступили от верхнего края */
 }
 
-.card-2 .card-img {
-    background-image: url('./img/spas_v_silah.jpg');
+.card-2 .card-img { 
+    background-image: url('./img/spas_v_silah.jpg'); 
+    background-position: center 0%; /* Спас ровно от верхнего края */
 }
 
-.card-3 .card-img {
-    background-image: url('./img/trinity.jpg');
+.card-3 .card-img { 
+    background-image: url('./img/trinity.jpg'); 
+    background-position: center 0%; /* Троица ровно от верхнего края */
 }
 
-/* Общий стиль для всех картинок в карточках, чтобы они были четкими */
+/* Общий стиль для всех картинок в карточках */
 .card-img {
     background-size: cover;
-    background-position: center;
     background-repeat: no-repeat;
 }
 
